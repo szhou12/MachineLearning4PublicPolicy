@@ -11,17 +11,18 @@ import os
 
 def read_data(filename):
     '''
-    Read Data
+    Read data
     '''
     
     if 'csv' not in filename:
         print('Please input a csv file.')
         return
     
-    file_path = 'data/' + filename
-    #script_dir = os.path.dirname(__file__)
-    #file_path = os.path.join(script_dir, filename)
+    filename = 'data/' + filename
+    script_dir = os.path.dirname(__file__)
+    file_path = os.path.join(script_dir, filename)
     df = pd.read_csv(file_path)
+    
     return df 
     
     
