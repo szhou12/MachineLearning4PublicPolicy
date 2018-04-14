@@ -14,22 +14,25 @@ import Preprocess
 
 def main(filename):
     df_raw = Read.read_data(filename)
+    
     # Explore.explore_data(df_raw)
     
+    '''
     # has PersonID, SeriousDlqin2yrs, zipcode
     df = Preprocess.fill_missing(df_raw,['MonthlyIncome'])
     df = Preprocess.fill_missing(df,['NumberOfDependents'],False)
     
     fail_discretize = True
     while fail_discretize:
-        colname = input('Input a vairable you want ot discretize: ')
+        colname = input('Input a vairable you want to discretize: ')
         df_disc = Preprocess.discretize(df, colname)
         if type(df_disc) is str:
             print(df_disc)
         else:
             fail_discretize = False
+    '''
     
-    return df
+    return df_raw
 
 
 
