@@ -98,9 +98,17 @@ def discretize(df, colname, is_norm=True):
     return df_disc
 
 
-def create_dummy(df_disc, colname):
-    dummy_col = pd.get_dummies(df_disc["d_"+colname])
-    return pd.concat(df_disc, dummy_col, axis=1)
+def create_dummy(df_disc, colname, is_norm=True):
+    
+    if is_norm:
+        df_disc['95% CI'] = df_disc["d_"+colname].apply(lambda x: \
+               '3 std' not in x)
+    else:
+        df_disc['upper 50%'] = df_disc["d_"+colname].apply(lambda x: \
+               x in ['Q3','Q4'])
+    
+    #dummy_col = pd.get_dummies(df_disc["d_"+colname])
+    return df_disc
 
 
 
