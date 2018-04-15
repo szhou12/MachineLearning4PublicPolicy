@@ -110,8 +110,6 @@ def quartilized(df, colname, use_log):
         else:
             df[discretize_colname] = pd.qcut(df[colname], 4, labels=qlabels)
     except:
-        print('Quantile-based discretization is not supported for this variable.')
-        print('Change to normalization-based discretization.')
         df, use_norm = normalized(df, colname, use_log)
     
     return df, use_norm
@@ -163,7 +161,7 @@ def create_dummy(df_disc, colname, is_norm=True):
         df_disc['upper 50%'] = df_disc["d_"+colname].apply(lambda x: \
                x in ['Q3','Q4'])
     
-    #dummy_col = pd.get_dummies(df_disc["d_"+colname])
+
     return df_disc
 
 

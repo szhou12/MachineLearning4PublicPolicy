@@ -27,8 +27,8 @@ def summarize(df_raw):
     
     summary_stats.to_csv('results/summary_stats.csv')
     corr_matrix.to_csv('results/correlation_matrix.csv')
-    print('Summary stats saved in results/summary_stats.csv')
-    print('Correlation matrix saved in results/correlation_matrix.csv')
+    print('\n Summary stats saved in results/summary_stats.csv')
+    print('\n Correlation matrix saved in results/correlation_matrix.csv')
     
     return df
 
@@ -56,7 +56,7 @@ def plot(df):
     [g.set_yticks(()) for g in graph.reshape(-1)]
     plt.savefig('results/scatter_matrix.png')
     plt.close()
-    print("scatter_matrix.png saved.")
+    print("\n scatter_matrix.png saved.")
     
     for i in list(df.columns.values):
         plt.hist(df[i].dropna(), bins=20)
@@ -65,14 +65,14 @@ def plot(df):
         plt.xlabel('Frequency')
         plt.savefig('results/Dist-{}.png'.format(i))
         plt.close()
-        print("Dist-{}.png saved.".format(i))
+        print("\n Dist-{}.png saved.".format(i))
         
         plt.boxplot(df[i].dropna(), sym='r+')
         plt.title('Boxplot of {}'.format(i))
         plt.xlabel(i)
         plt.savefig('results/Outliers-{}.png'.format(i))
         plt.close()
-        print("Outliers-{}.png saved.".format(i))
+        print("\n Outliers-{}.png saved.".format(i))
         
 
 
