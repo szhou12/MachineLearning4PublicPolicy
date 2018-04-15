@@ -12,10 +12,13 @@ import pandas as pd
 
 def summarize(df_raw):
     '''
-    summary statistics and correlations between variables
+    Summary statistics and correlations between variables
+    Input:
+        df_raw: raw dataframe from Read.py
     Outputs:
         summary_stats.csv: summary statistics for each variable
         correlation_matrix.csv: correlation matrix between variables
+        df: dataframe that gets rid of 'PersonID','zipcode'
     '''
     df = df_raw.drop(columns=['PersonID','zipcode'])
     summary_stats = df.describe().transpose()
@@ -33,6 +36,8 @@ def summarize(df_raw):
 def plot(df):
     '''
     Plot distributions of variables.
+    Input:
+        df: dataframe that gets rid of 'PersonID','zipcode'
     Outputs:
         scatter_matrix.png: scatter plots between each two variables; 
                             the diagonal is the density fcn of each variable
@@ -72,11 +77,9 @@ def plot(df):
 
 
 
-
-
 def explore_data(df_raw):
     '''
-    Main function to be called upon.
+    Main exploration function to be called upon.
     '''
     
     if df_raw is None:
@@ -86,8 +89,6 @@ def explore_data(df_raw):
     df = summarize(df_raw) 
     plot(df)
     
-    
-    #return df_raw.drop(columns=['PersonID','zipcode'])
 
 
 

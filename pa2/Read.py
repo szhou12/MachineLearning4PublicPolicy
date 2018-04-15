@@ -11,7 +11,11 @@ import os
 
 def read_data(filename):
     '''
-    Read data
+    Read data.
+    Input:
+        filename (str): file name
+    Output:
+        df: pandas dataframe
     '''
     
     if 'csv' not in filename:
