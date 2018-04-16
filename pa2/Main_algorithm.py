@@ -17,6 +17,7 @@ def main(filename):
     Main function that operates Read.py, Explore.py, Preprocess.py, Build.py, 
     Evaluation.py
     '''
+    
     df_raw = Read.read_data(filename)
     
     Explore.explore_data(df_raw)
@@ -28,6 +29,7 @@ def main(filename):
     
     norm_dict, quant_dict, s_df = Evaluation.store(df)
     Evaluation.output(norm_dict, quant_dict, s_df)
+    
 
     print('\n All done.')
 
