@@ -1,4 +1,4 @@
-# Homework 2: Machine Learning Pipeline
+# Machine Learning Pipeline
 
 ## Run the code:
 * Download the whole folder and keep its hierarchy.
