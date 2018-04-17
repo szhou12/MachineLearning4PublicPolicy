@@ -87,7 +87,7 @@ def quartilized(df, colname, use_log):
     4 categories:
         Q1: bottom 25% in the rank
         Q2: (25%, 50%) in the rank
-        Q3: (50%, 70%) in the rank
+        Q3: (50%, 75%) in the rank
         Q4: top 25% in the rank
     Inputs:
         df: dataframe
