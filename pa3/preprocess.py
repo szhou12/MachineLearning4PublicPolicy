@@ -13,7 +13,9 @@ import pandas as pd
 
 
 def impute(df, cols, is_numeric=False, is_binary=False):
-    
+    '''
+    Fill in missing values.
+    '''
     for col in cols:
         if df[col].isnull().values.any():
             if is_numeric:
