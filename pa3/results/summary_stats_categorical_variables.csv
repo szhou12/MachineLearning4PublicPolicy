@@ -1,0 +1,11 @@
+,count,unique,top,freq,missing_data_counts
+school_zip,353151.0,14425.0,90011.0,1210.0,0
+school_metro,310130,3,urban,178344,43021
+teacher_prefix,353151,4,Mrs.,171005,0
+primary_focus_subject,353116,27,Literacy,108723,35
+primary_focus_area,353116,7,Literacy & Language,161977,35
+secondary_focus_subject,237065,27,Literature & Writing,35205,116086
+secondary_focus_area,237065,7,Literacy & Language,85484,116086
+resource_type,353109,6,Technology,124485,42
+poverty_level,353151,4,highest poverty,193518,0
+grade_level,353145,4,Grades PreK-2,134998,6
