@@ -77,11 +77,12 @@ binary_cols = np.array(['school_magnet', 'school_year_round',
                         ])
 
     
-def main(filename_x, filename_y):
+def main(filename_x, filename_y, test_length):
     
     target_col = 'fully_funded'
     model_lst = ['RF','BST', 'BAG','LR','KNN','DT','NB','SVM']
-    # model_lst = ['DT','SVM','NB']
+    #model_lst = ['RF','BST', 'BAG','LR','KNN','DT','NB']
+    
     select_cols = {0:categorical_cols, 1:numeric_cols, 2:binary_cols}
     
     # read and join data
@@ -106,7 +107,7 @@ def main(filename_x, filename_y):
     print("Exploration & Preprocessment done.")
     
     clfs, grid = models.create_clfs_params()
-    models.experiment_clfs(df, target_col, unused_cols, numeric_cols, clfs, model_lst, grid)
+    models.experiment_clfs(df, target_col, unused_cols, numeric_cols, clfs, model_lst, grid, test_length)
     
     print("\n Mission completed.")
     
@@ -118,7 +119,8 @@ def main(filename_x, filename_y):
 if __name__=="__main__":
     x = "projects.csv"
     y = "outcomes.csv"
-    main(x, y)
+    test_length = 6
+    main(x, y, test_length)
     
     
     
