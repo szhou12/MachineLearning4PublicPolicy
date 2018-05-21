@@ -52,7 +52,7 @@ def get_info(dic, metric, info_cols):
     Output:
         display: (dataframe) selected dataframe
     '''
-    display = dic[metric][info_cols]
+    display = dic[metric][info_cols].reset_index()
     return display
 
 
