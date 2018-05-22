@@ -19,7 +19,7 @@ python3 main.py
 * utils.py - Read, explore, and split data.
 * preprocess.py - Impute, discretize, and pre-process data.
 * models.py - Build supervised learning classifiers and evaluate each by multiple metrics.
-* main.py - Apply this pipeline-library to the data given.
+* main.py - Apply this pipeline-library to the given data.
 * eval_analysis - helper functions used for results analysis.
 * Results_Analysis_test6.ipynb - Analyze results as the test window = 6 months.
 * Results_Analysis_test12.ipynb - Analyze results as the test window = 12 months.
