@@ -13,7 +13,7 @@ python3 main.py
 * Folder 'eval_results' provide PR curves and evaluation summary (classifier_eval.csv) for testing window = 6 months.
 * Folder 'eval_results_1' provide PR curves and evaluation summary (classifier_eval.csv) for testing window = 12 months.
 * Folder 'results' provide distribution plots, boxplots and summary stats for each used variable.
-* Caveat: Running SVM model is extremely slow (it may take more than 1 day to finish!). The user can decide whether to include SVM model for analysis by editing model_lst in main.py.
+* Caveat: Running SVM model is extremely slow (it may take more than 1 day to finish!). The user can decide whether to include SVM model for analysis by editing model_lst variable in main.py.
 
 ## Specification:
 * utils.py - Read, explore, and split data.
