@@ -10,9 +10,9 @@ python3 main.py
 
 ## Notice:
 * The default test_length is 6. If you want to change the testing window, please open main.py in text editor, find the __main__, and change the test_length.
-* Folder 'eval_results' provide PR curves and evaluation summary (classifier_eval.csv) for testing window = 6 months.
-* Folder 'eval_results_1' provide PR curves and evaluation summary (classifier_eval.csv) for testing window = 12 months.
-* Folder 'results' provide distribution plots, boxplots and summary stats for each used variable.
+* Folder 'eval_results' provides PR curves and evaluation summary (classifier_eval.csv) for testing window = 6 months.
+* Folder 'eval_results_1' provides PR curves and evaluation summary (classifier_eval.csv) for testing window = 12 months.
+* Folder 'results' provides distribution plots, boxplots and summary stats for each used variable.
 * Caveat: Running SVM model is extremely slow (it may take more than 1 day to finish!). The user can decide whether to include SVM model for analysis by editing model_lst variable in main.py.
 
 ## Specification:
