@@ -78,6 +78,19 @@ binary_cols = np.array(['school_magnet', 'school_year_round',
 
     
 def main(filename_x, filename_y, test_length):
+    '''
+    Main function that ensembles all.
+    Inputs:
+        filename_x: projects.csv file
+        filename_y: outcomes.csv file
+        test_length: (positive int) testing window (unit=month)
+    Outputs:
+        Exploration: distribution of each variable, 
+                     correlation matrix for numerical variables, 
+                     and boxplots for numerical variables.
+        Evaluation: dataframe, in which each row is a classifier, parameters used,
+                    and its evaluation score in different metrics.
+    '''
     
     target_col = 'fully_funded'
     model_lst = ['RF','BST', 'BAG','LR','KNN','DT','NB','SVM']

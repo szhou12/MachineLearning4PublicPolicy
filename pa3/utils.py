@@ -42,6 +42,11 @@ def filter_join(dfx, dfy):
     '''
     Join projects and outcomes on projectid.
     Filter data from years 2011-2013.
+    Inputs:
+        dfx: dataframe from projects
+        dfy: dataframe from outcomes
+    Output:
+        df_filtered: joint table of dfx and dfy
     '''
     if 'date_posted' in dfx.columns:
         dfx['date_posted'] = pd.to_datetime(dfx['date_posted'])
@@ -62,8 +67,14 @@ def filter_join(dfx, dfy):
 
 def split_data(df, target_col, unused_cols, test_length):
     '''
-    target_col = 'fully_funded'
-    test_length: (positive int) the length of the test sets (in months)
+    Temporal validation function: split data based on time series
+    Inputs:
+        df: dataframe
+        target_col: target variable 'fully_funded'
+        test_length: (positive int) testing window (in months)
+        unused_cols: cols that are not used in analysis
+    Output:
+        x_train, x_test, y_train, y_test
     '''
     most_recent_date = df['date_posted'].max()
     most_recent_year =  most_recent_date.year
@@ -116,10 +127,13 @@ def summarize(df_raw, select_cols, is_numeric=False, is_binary=False):
     Summary statistics and correlations between variables
     Input:
         df_raw: raw dataframe
+        select_cols: (numpy array) columns selected for summary stats
+        is_numeric: (bool) True is select_cols = numerical vols
+        is_binary: (bool) True is select_cols = binary vols
     Outputs:
         summary_stats.csv: summary statistics for each variable
-        correlation_matrix.csv: correlation matrix between variables
-        df: dataframe that gets rid of 'PersonID','zipcode'
+        correlation_matrix.csv: correlation matrix between numerical variables
+        df: dataframe
     '''
     df = df_raw[select_cols]
     
@@ -151,10 +165,11 @@ def plot(df, is_numeric):
     '''
     Plot distributions of variables.
     Input:
-        df: dataframe that gets rid of 'PersonID','zipcode'
+        df: dataframe
+        is_numeric: (bool) True if plotting numerical columns
     Outputs:
         Dist-<variable-name>.png: histogram of each variable
-        Outliers-<variable-name>.png: boxplot of each variable that shows outliers
+        Outliers-<variable-name>.png: boxplot of each numerical variable that shows outliers
     '''
     
     for i in list(df.columns.values):

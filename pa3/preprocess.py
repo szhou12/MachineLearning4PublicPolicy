@@ -11,10 +11,20 @@ import scipy.stats
 import numpy as np
 import pandas as pd
 
+'''
+preprocess.py is to impute and discretize data.
+'''
 
 def impute(df, cols, is_numeric=False, is_binary=False):
     '''
     Fill in missing values.
+    Inputs:
+        df: the original dataframe
+        cols (list): a list of col names that have missing values
+        is_numeric: (bool) True if cols = numerical cols
+        is_binary: (bool) True if cols = binary cols
+    Outputs:
+        df: dataframe after imputation
     '''
     for col in cols:
         if df[col].isnull().values.any():
@@ -38,7 +48,12 @@ def impute_helper(df, c, method='mean'):
     Inputs:
         df: the original dataframe
         cols (list): a list of col names that have missing values
-        use_mean (bool): use mean to fill in missing values or not
+        mean: ='mean' if use mean to fill in missing values; 
+              ='zero' if use 0 to fill in missing values;
+              ='keep' if use 'missing' to fill in missing values;
+              ='drop' if drop this row.
+    Outputs:
+        df: dataframe after imputation
     '''
     if method == 'mean':
         mean = int(df[c].mean())
@@ -55,6 +70,14 @@ def impute_helper(df, c, method='mean'):
 def encode_labels(df, cols, is_binary=False):
     '''
     Encode categorical values.
+    Inputs:
+        df: the original dataframe
+        cols: columns to encode labels on
+        is_binary: (bool) True if encode labels on binary columns;
+                    False if encode labels on categorical columns or 
+                    discretized numerical columns
+    Output:
+        df: dataframe after encoding
     '''
     if is_binary:
         for c in cols:
@@ -77,6 +100,13 @@ def discretize(x_train, x_test, numeric_cols, if_dummy=False):
     2. discretize x_train and x_test using normalization method.
         log transformation is applied if the distribution is skewed.
     3. create dummy from the above step if required.
+    Inputs:
+        x_train: training data for features
+        x_test: testing data for features
+        numeric_cols: (numpy array) numerical variables
+        if_dummy: (bool) True if needs to create dummy variables
+    Outputs:
+        discretized x_train and x_test
     '''
     for col in numeric_cols:
         if x_train[col].isnull().values.any():
@@ -145,6 +175,13 @@ def discretize_train_set(s):
 def discretize_test_set(s, train_mean, train_stdev, use_log):
     '''
     Discretize testing set using information from training set
+    Inputs:
+        s: (pandas series) column to discretize on
+        train_mean: mean from training set
+        train_stdev: standard deviation from training set
+        use_log: (bool) True if apply log transformation
+    Output:
+        de_s: (pandas series) discretized column
     '''
     if use_log:
         s = s.apply(np.log1p)

@@ -5,6 +5,7 @@ Created on Sun May 13 17:11:52 2018
 
 @author: JoshuaZhou
 """
+### code is modified from https://github.com/rayidghani/magicloops/blob/master/magicloops.py
 
 import numpy as np
 import pandas as pd
@@ -30,8 +31,15 @@ import utils
 import preprocess
 
 def create_clfs_params(is_test_grid=False):
+    '''
+    Create classifiers dictionary and paramater grid.
+    Input:
+        is_test_grid: (bool) True if use test_grid; False if use std_grid
+    Outputs:
+        classifiers: (dictionary) classifiers dictionary
+        grid: (dictionary) paramater grid
+    '''
     
-    # C in LR needs to be modified to better fit
     classifiers = {'DT': DecisionTreeClassifier(),
                    'LR': LogisticRegression(penalty='l2', C=1),
                    'KNN': KNeighborsClassifier(n_neighbors=3),
@@ -71,6 +79,12 @@ def create_clfs_params(is_test_grid=False):
 def binary_at_threshold(y_pred_probs_sorted, k):
     '''
     Assign binary scores to prediected probability at threshold k.
+    Inputs:
+        y_pred_probs_sorted: probability estimates of target variable 
+                            (sorted from highest to lowest)
+        k: threshold (in percent)
+    Output:
+        y_pred_bi_sorted: binary estimates of target variable
     '''
     threshold = int(len(y_pred_probs_sorted)*(k/100))
     y_pred_bi_sorted = [0 if x>=threshold else 1 for x in range(len(y_pred_probs_sorted))]
@@ -81,6 +95,14 @@ def binary_at_threshold(y_pred_probs_sorted, k):
 def pr_at_threshold(y_pred_probs_sorted, y_test_sorted, k):
     '''
     Compute precision and recall scores at threshold k.
+    Inputs:
+        y_pred_probs_sorted: probability estimates of target variable (sorted)
+        y_test_sorted: test data for target variable 
+                       (sorted objects match with those in y_pred_probs_sorted)
+        k: threshold (in percent)
+    Outputs:
+        precision_at_k: precision score at threshold k
+        recall_at_k: recall score at threshold k
     '''
     y_pred_bi_sorted = binary_at_threshold(y_pred_probs_sorted, k)
     recall_at_k = recall_score(y_test_sorted, y_pred_bi_sorted)
@@ -92,6 +114,14 @@ def pr_at_threshold(y_pred_probs_sorted, y_test_sorted, k):
 def plot_pr_curve(y_test, y_pred_probs, model_name, params):
     '''
     Plot Precision-Recall Curve for a given model.
+    Inputs:
+        y_test: test data for target variable (unsorted)
+        y_pred_probs: probablity estimates for target variable 
+                     (unsorted but objects match with those in y_test)
+        model_name: model currently plotting on
+        params: for legend (unused here)
+    Output:
+        PR-curve-{}.png: PR-curve for a given model
     '''
     precision, recall, thresholds = precision_recall_curve(y_test, y_pred_probs)
     plt.figure()
@@ -144,6 +174,21 @@ def experiment_clfs(df, target_col, unused_cols, numeric_cols, clfs, model_lst, 
     '''
     Experiment with different parameters for classifiers.
     Loop through each model and evaluate correspondingly.
+    Inputs:
+        df: dataframe (joint table)
+        target_col: (numpy array) target variable
+        unused_cols: (numpy array) unused varaibles in df
+        numeric_cols: (numpy array) numerical variables in df
+        clfs: (dictionary) classifiers from create_clfs_params() function
+        model_lst: (list of strings) model names to use
+        grid: (dictionary) grid from create_clfs_params() function
+        test_length: (positive int) testing window (unit=month)
+        is_temporal: (bool) True if use temporal validation to split data; False if use random split
+        draw: (bool) True if plot PR curve for each variable
+        table: (bool) True if output evaluation results
+    Outputs:
+        PR-curves
+        classifiers_eval.csv: csv file that stores evaluation results
     '''
     output_cols = ('model', 'parameters', 'train_time', 'test_time',
                    'accuracy','F1_score','auc',
@@ -213,6 +258,12 @@ def evaluate(y_pred, y_pred_probs, y_test):
     Given predicted values, predicted probabilities and test data for the target variable,
     compute accuracy score, F1 score, precision score, recall score, auc score,
     precision scores at different thresholds, recall scores at different thresholds.
+    Inputs:
+        y_pred: predicted binary values for target variable
+        y_pred_probs: probablity estimates for target variable
+        y_test: test data for target variable
+    Outputs:
+        scores: (dictionary) key=score name; value=corresponding score
     '''
     scores = {}
     score_metrics = {'accuracy':accuracy_score,'F1_score':f1_score,'auc':roc_auc_score}
